@@ -86,28 +86,28 @@ function render(renderFunc, text, params) {
 
 export const create = QRCode.create
 
-export const toCanvas = require('./browser').toCanvas
+export { toCanvas } from './browser';
 
-export function toString (text, opts, cb) {
+export function toString(text, opts, cb) {
   const params = checkParams(text, opts, cb);
   const type = params.opts ? params.opts.type : undefined;
   const renderer = getStringRendererFromType(type);
   return render(renderer.render, text, params);
 }
 
-export function toDataURL (text, opts, cb) {
+export function toDataURL(text, opts, cb) {
   const params = checkParams(text, opts, cb);
   const renderer = getRendererFromType(params.opts.type);
   return render(renderer.renderToDataURL, text, params);
 }
 
-export function toBuffer (text, opts, cb) {
+export function toBuffer(text, opts, cb) {
   const params = checkParams(text, opts, cb);
   const renderer = getRendererFromType(params.opts.type);
   return render(renderer.renderToBuffer, text, params);
 }
 
-export function toFile (path, text, opts, cb) {
+export function toFile(path, text, opts, cb) {
   if (
     typeof path !== "string" ||
     !(typeof text === "string" || typeof text === "object")
@@ -127,7 +127,7 @@ export function toFile (path, text, opts, cb) {
   return render(renderToFile, text, params);
 }
 
-export function toFileStream (stream, text, opts) {
+export function toFileStream(stream, text, opts) {
   if (arguments.length < 2) {
     throw new Error("Too few arguments provided");
   }

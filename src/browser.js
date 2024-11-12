@@ -2,7 +2,7 @@ import canPromise from './can-promise'
 
 import { create as qrCodeCreate } from './core/qrcode'
 import { render as canvasRender, renderToDataURL } from './renderer/canvas'
-import { render as svgTagRender } from './renderer/svg-tag.js'
+import { render as svgTagRender } from './renderer/svg-tag'
 
 function renderCanvas (renderFunc, canvas, text, opts, cb) {
   const args = [].slice.call(arguments, 1)

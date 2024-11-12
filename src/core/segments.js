@@ -11,7 +11,7 @@ import {
   BYTE_KANJI
 } from './regex'
 import { isKanjiModeEnabled } from './utils'
-import { find_path } from 'dijkstrajs'
+import find_path from 'dijkstrajs'
 
 /**
  * Returns UTF8 byte length

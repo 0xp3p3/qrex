@@ -1,5 +1,5 @@
-const Mode = require("./mode");
-const Utils = require("./utils");
+import * as Mode from "./mode";
+import * as Utils from "./utils";
 
 export class KanjiData {
   constructor (data) {

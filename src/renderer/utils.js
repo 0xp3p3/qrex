@@ -34,14 +34,14 @@ function hex2rgba(hex) {
   };
 }
 
-export function getOptions (options) {
+export function getOptions(options) {
   if (!options) options = {};
   if (!options.color) options.color = {};
 
   const margin =
     typeof options.margin === "undefined" ||
-    options.margin === null ||
-    options.margin < 0
+      options.margin === null ||
+      options.margin < 0
       ? 4
       : options.margin;
 
@@ -57,23 +57,24 @@ export function getOptions (options) {
       dark: hex2rgba(options.color.dark || "#000000ff"),
       light: hex2rgba(options.color.light || "#ffffffff"),
     },
+    image: options.image,
     type: options.type,
     rendererOpts: options.rendererOpts || {},
   };
 }
 
-export function getScale (qrSize, opts) {
+export function getScale(qrSize, opts) {
   return opts.width && opts.width >= qrSize + opts.margin * 2
     ? opts.width / (qrSize + opts.margin * 2)
     : opts.scale;
 }
 
-export function getImageWidth (qrSize, opts) {
+export function getImageWidth(qrSize, opts) {
   const scale = getScale(qrSize, opts);
   return Math.floor((qrSize + opts.margin * 2) * scale);
 }
 
-export function qrToImageData (imgData, qr, opts) {
+export function qrToImageData(imgData, qr, opts) {
   const size = qr.modules.size;
   const data = qr.modules.data;
   const scale = getScale(size, opts);

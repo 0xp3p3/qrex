@@ -18,7 +18,7 @@ function getCanvasElement() {
   }
 }
 
-export function render (qrData, canvas, options) {
+export function render(qrData, canvas, options) {
   let opts = options;
   let canvasEl = canvas;
 
@@ -41,10 +41,28 @@ export function render (qrData, canvas, options) {
   clearCanvas(ctx, canvasEl, size);
   ctx.putImageData(image, 0, 0);
 
+  if (opts.image) {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Utils.getScale(qrData.modules.size, opts);
+      // Draw the image to fit the canvas
+      ctx.clearRect(size / 2 - scale * 6, size / 2 - scale * 6, scale * 12, scale * 12);
+      ctx.drawImage(img, size / 2 - scale * 5, size / 2 - scale * 5, scale * 10, scale * 10);
+      // Revoke the blob URL after using it to free memory
+      URL.revokeObjectURL(opts.image);
+    };
+
+    img.onerror = () => {
+      console.error('Error loading the image from the blob URL.');
+    };
+    // Set the image source to the blob URL
+    img.src = opts.image;
+  }
+
   return canvasEl;
 }
 
-export function renderToDataURL (qrData, canvas, options) {
+export function renderToDataURL(qrData, canvas, options) {
   let opts = options;
 
   if (typeof opts === "undefined" && (!canvas || !canvas.getContext)) {
